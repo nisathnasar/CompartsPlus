@@ -24,6 +24,12 @@ class CreateUsersTable extends Migration
             $table->enum('marketing_emails', ['yes', 'no'])->default('no');
             $table->enum('terms_and_conditions', ['yes', 'no'])->default('no');
             $table->foreign('cart_id')->references('cart_id')->on('carts');
+            $table->string('postcode');
+            $table->string('address1');
+            $table->string('address2');
+            $table->string('city_town');
+            $table->string('county');
+            $table->string('country');
             $table->rememberToken();
             $table->timestamps();
         });
