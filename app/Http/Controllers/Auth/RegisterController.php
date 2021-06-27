@@ -50,9 +50,19 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'date_of_birth' => ['required', 'date', 'max:255'],
+            'postcode' => ['required', 'string', 'min:5', 'max:7'],
+            'address1' => ['required', 'string', 'max:255'],
+            'address2' => ['required', 'string', 'max:255'],
+            'city_town' => ['required', 'string', 'max:255'],
+            'county' => ['required', 'string', 'max:255'],
+            'country' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'marketing_emails' => ['boolean'],
+            'terms_and_conditions' => ['required', 'boolean'],
         ]);
     }
 
@@ -64,10 +74,23 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'date_of_birth' => $data['date_of_birth'],
+            'marketing_emails' => $data['marketing_emails'] ?? 0,
+            'terms_and_conditions' => $data['terms_and_conditions'],
+            // 'cart-id' => $data['cart_id'],
+            'postcode' => $data['postcode'],
+            'address1' => $data['address1'],
+            'address2' => $data['address2'],
+            'city_town' => $data['city_town'],
+            'county' => $data['county'],
+            'country' => $data['country'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+
         ]);
     }
 }

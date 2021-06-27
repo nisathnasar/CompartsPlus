@@ -14,7 +14,7 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->id('item_id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->string('brand');
             $table->string('category');
@@ -26,6 +26,7 @@ class CreateItemsTable extends Migration
             $table->string('barcode');
             $table->bigInteger('stock_quantity');
             $table->bigInteger('reorder_level');
+            $table->bigInteger('supplier_id')->unsigned();
             //$table->foreign('supplier_id')->references('supplier_id')->on('suppliers');
 
             $table->timestamps();

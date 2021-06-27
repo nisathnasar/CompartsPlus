@@ -14,19 +14,18 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id');
+            $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('last_name');
             $table->date('date_of_birth');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->default(null);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('marketing_emails', ['yes', 'no'])->default('no');
-            $table->enum('terms_and_conditions', ['yes', 'no'])->default('no');
-            $table->foreign('cart_id')->references('cart_id')->on('carts');
+            $table->boolean('marketing_emails');
+            $table->boolean('terms_and_conditions');
             $table->string('postcode');
-            $table->string('address1');
             $table->string('address2');
+            $table->string('address1');
             $table->string('city_town');
             $table->string('county');
             $table->string('country');
